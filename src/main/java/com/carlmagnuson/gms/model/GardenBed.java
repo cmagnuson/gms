@@ -3,11 +3,14 @@ package com.carlmagnuson.gms.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class GardenBed {
@@ -18,12 +21,16 @@ public class GardenBed {
     private double lat;
     @Getter @Setter
     private double lon;
+    @OneToMany(mappedBy = "gardenBed")
+    @Getter @Setter
+    private Collection<Planting> planting;
 
     protected GardenBed() {}
 
     public GardenBed(Double lat, Double lon) {
         this.lat = lat;
         this.lon = lon;
+        planting = new ArrayList<>();
     }
 
     @Override

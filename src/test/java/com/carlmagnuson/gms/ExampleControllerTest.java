@@ -36,7 +36,7 @@ class ExampleControllerTest {
     void get() throws Exception {
         mvc.perform((MockMvcRequestBuilders.get("/gardenBed/1").accept(MediaType.APPLICATION_JSON)))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{\"id\":1,\"lat\":0.1,\"lon\":0.2}")));
+                .andExpect(content().string(equalTo("{\"id\":1,\"lat\":0.1,\"lon\":0.2,\"planting\":[]}")));
     }
 
     @Test
@@ -48,7 +48,7 @@ class ExampleControllerTest {
                 .content(new ObjectMapper().writeValueAsString(gb))
                 .contentType(MediaType.APPLICATION_JSON)))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{\"id\":3,\"lat\":92.1,\"lon\":45.1}")));
+                .andExpect(content().string(equalTo("{\"id\":3,\"lat\":92.1,\"lon\":45.1,\"planting\":[]}")));
     }
 
     @Test
@@ -60,7 +60,7 @@ class ExampleControllerTest {
                 .content(new ObjectMapper().writeValueAsString(gb))
                 .contentType(MediaType.APPLICATION_JSON)))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{\"id\":1,\"lat\":92.1,\"lon\":45.1}")));
+                .andExpect(content().string(equalTo("{\"id\":1,\"lat\":92.1,\"lon\":45.1,\"planting\":[]}")));
     }
 
     @Test

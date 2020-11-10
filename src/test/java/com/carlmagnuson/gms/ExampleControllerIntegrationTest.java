@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import java.net.URL;
 
@@ -30,7 +29,6 @@ public class ExampleControllerIntegrationTest {
     }
 
     @Test
-    //@WithMockUser(username = "user", password = "password", roles = "USER")
     public void getHello() {
         ResponseEntity<String> response = template.getForEntity(base.toString(),
                 String.class);
