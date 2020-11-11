@@ -42,13 +42,13 @@ class ExampleControllerTest {
     @Test
     @WithMockUser
     void create() throws Exception {
-        GardenBed gb = new GardenBed(92.1, 45.1);
+        GardenBed gb = new GardenBed(92.1,  45.1);
 
         mvc.perform((MockMvcRequestBuilders.post("/gardenBed").accept(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(gb))
                 .contentType(MediaType.APPLICATION_JSON)))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{\"id\":3,\"lat\":92.1,\"lon\":45.1,\"planting\":[]}")));
+                .andExpect(content().string(equalTo("{\"id\":4,\"lat\":92.1,\"lon\":45.1,\"planting\":[]}")));
     }
 
     @Test
