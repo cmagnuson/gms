@@ -32,10 +32,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '*/build/distributions/*.zip', fingerprint: true
-            archiveArtifacts artifacts: '*/build/outputs/apk/release/*.apk', fingerprint: true
-            archiveArtifacts artifacts: '*/build/doc/*.pdf', fingerprint: true
-            archiveArtifacts artifacts: '*/doc/*.pdf', fingerprint: true
+            archiveArtifacts artifacts: '*/build/libs/*.jar', fingerprint: true
 
             junit '*/build/test-results/**/*.xml'
 
