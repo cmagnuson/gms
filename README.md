@@ -1,4 +1,4 @@
-#Garden Management System (gms)
+# Garden Management System (gms)
 At the moment this is a learning project, to get up to speed on Spring Boot and React things, as well as integration with Gradle, CI, etc.
 
 Run with
