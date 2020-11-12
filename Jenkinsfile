@@ -6,6 +6,11 @@ pipeline {
     }
 
     stages {
+        stage('Clean') {
+            steps {
+                sh './gradlew clean'
+            }
+        }
         stage('Build') {
             steps {
                 sh './gradlew assemble'
@@ -13,7 +18,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'pwd'
                 sh './gradlew build'
             }
         }
@@ -32,18 +36,18 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '*/build/libs/*.jar', fingerprint: true
+            archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
 
-            junit '*/build/test-results/**/*.xml'
+            junit 'build/test-results/**/*.xml'
 
             recordIssues enabledForFailure: true, tools: [java(), javaDoc()]
             recordIssues(
                     enabledForFailure: true,
-                    tool: spotBugs(pattern: '**/build/reports/findbugs/main.xml'),
+                    tool: spotBugs(pattern: 'build/reports/findbugs/main.xml'),
             )
             recordIssues(
                     enabledForFailure: true,
-                    tool: pmdParser(pattern: '**/build/reports/pmd/main.xml'),
+                    tool: pmdParser(pattern: 'build/reports/pmd/main.xml'),
             )
             recordIssues(tools: [errorProne()])
             recordIssues(tool: taskScanner(highTags:'FIXME', normalTags:'TODO', includePattern: '**/*.java', excludePattern: 'target/**/*'))
