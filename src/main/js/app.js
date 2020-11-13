@@ -5,19 +5,31 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {plantings: []};
+        this.state = {plantings: [], isLoaded:false};
     }
 
     componentDidMount() {
-        fetch("/planting")
-            .then(res => res.json())
-            .then(result => this.setState({plantings: result}));
+       this.loadFromServer();
     }
 
     render() {
+        let list;
+        if(this.state.isLoaded){
+            list =  <PlantingList plantings={this.state.plantings}/>
+        }
+        else {
+            list = <div>Loading</div>
+        }
+
         return (
-            <PlantingList plantings={this.state.plantings}/>
+            {list}
         )
+    }
+
+  loadFromServer() {
+        fetch("/planting")
+            .then(res => res.json())
+            .then(result => this.setState({plantings: result, isLoaded:true}));
     }
 }
 
@@ -42,6 +54,11 @@ class PlantingList extends React.Component{
 }
 
 class Planting extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {lon:null, lat:null, plantedTime:null};
+    }
+
     render() {
         return (
             <tr>

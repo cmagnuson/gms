@@ -2,18 +2,17 @@ package com.carlmagnuson.gms.controller;
 
 import com.carlmagnuson.gms.model.GardenBed;
 import com.carlmagnuson.gms.repository.GardenBedRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class GardenBedController {
 
-    final private GardenBedRepository gardenBedRepository;
-
-    GardenBedController(GardenBedRepository gardenBedRepository){
-        this.gardenBedRepository = gardenBedRepository;
-    }
+    private final GardenBedRepository gardenBedRepository;
 
     @GetMapping("/gardenBed")
     List<GardenBed> list(){

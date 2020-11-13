@@ -2,18 +2,18 @@ package com.carlmagnuson.gms.controller;
 
 import com.carlmagnuson.gms.model.Planting;
 import com.carlmagnuson.gms.repository.PlantingRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 public class PlantingController {
 
-    final private PlantingRepository plantingRepository;
-
-    PlantingController(PlantingRepository plantingRepository){
-        this.plantingRepository = plantingRepository;
-    }
+    private final PlantingRepository plantingRepository;
 
     @GetMapping("/planting")
     List<Planting> list(){
@@ -32,6 +32,7 @@ public class PlantingController {
 
     @PutMapping("/planting/{id}")
     Planting replacePlanting(@RequestBody Planting newPlanting, @PathVariable Long id) {
+    log.debug("Replacing planting: "+id+" with: "+newPlanting);
 
         return plantingRepository.findById(id)
                 .map(planting -> {
