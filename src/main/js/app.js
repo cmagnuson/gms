@@ -13,19 +13,14 @@ class App extends React.Component {
     }
 
     render() {
-        let list;
-        if(this.state.isLoaded){
-            list =  <PlantingList plantings={this.state.plantings} />
-        }
-        else {
-            list = <div>Loading</div>
-        }
-
+        const isLoaded = this.state.isLoaded;
         return (
             <ErrorBoundary>
-                {list}
+                {isLoaded
+                ? <PlantingList plantings={this.state.plantings} />
+                : <div>Loading</div>}
             </ErrorBoundary>
-        )
+        );
     }
 
   loadFromServer() {
