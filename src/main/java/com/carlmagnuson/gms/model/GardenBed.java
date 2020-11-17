@@ -1,5 +1,6 @@
 package com.carlmagnuson.gms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,12 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GardenBed {
 
     @Id @GeneratedValue @Getter @Setter
@@ -21,7 +20,7 @@ public class GardenBed {
     private double lat;
     @Getter @Setter
     private double lon;
-    @OneToMany(mappedBy = "gardenBed")
+    @OneToMany(mappedBy = "gardenBed", fetch = FetchType.LAZY)
     @Getter @Setter
     private Collection<Planting> planting;
 
